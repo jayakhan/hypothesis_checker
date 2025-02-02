@@ -1,7 +1,7 @@
 import google.generativeai as genai
 import streamlit as st
 
-genai.configure(api_key=api_key)
+genai.configure(api_key=st.secrets["auth_token"])
 
 PROMPT_TEMPLATE = """
 You are an AI assistant helping with A/B test analysis. Given the p-values for different metrics, generate an experiment report following this format:
