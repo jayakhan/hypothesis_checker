@@ -8,6 +8,32 @@ from gemini_integration import *
 
 
 st.title("Check Your A/B Experiment Results")
+st.write("***Ensure your dataset follows this format before uploading.***")
+
+# Create two columns
+col1, col2 = st.columns([3, 1])  # Adjust width as needed
+
+with col1:
+    st.write("Your dataset should follow this format:")
+    st.markdown(
+        """
+    - **Column names**: Must be parsable (letters, numbers, spaces, underscores only).
+    - **First row**: Should contain column names.
+    - **Group column**: Must exist and contain only "Control" and "Treatment".
+    - **Other columns**: Must contain numeric data, with no fully empty columns.
+    """
+    )
+
+with col2:
+    with open(
+        "experiment_data.csv", "rb"
+    ) as f:  # Open as binary file for proper download
+        st.download_button(
+            "📥 Download Sample CSV",
+            f,
+            file_name="experiment_data.csv",
+            mime="text/csv",
+        )
 
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
